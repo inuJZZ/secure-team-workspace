@@ -2,11 +2,30 @@ import type { NextFunction, Request, Response } from 'express';
 import { verifyJwt } from '../utils/security.js';
 import { memberships, users } from '../db/memory.js';
 
+declare global {
+  namespace Express {
+    interface Request {
+      user?: {
+        id: string;
+        email: string;
+        name: string;
+        avatarUrl?: string;
+        bio?: string;
+        favoriteGenres?: string[];
+      };
+      orgId?: string;
+    }
+  }
+}
+
 export interface AuthenticatedRequest extends Request {
   user?: {
     id: string;
     email: string;
     name: string;
+    avatarUrl?: string;
+    bio?: string;
+    favoriteGenres?: string[];
   };
   orgId?: string;
 }
@@ -30,7 +49,10 @@ export const requireAuth = (req: AuthenticatedRequest, res: Response, next: Next
     req.user = {
       id: user.id,
       email: user.email,
-      name: user.name
+      name: user.name,
+      avatarUrl: user.avatarUrl,
+      bio: user.bio,
+      favoriteGenres: user.favoriteGenres
     };
     next();
   } catch {
@@ -44,7 +66,7 @@ export const requireOrgMembership = (requiredRole?: 'admin' | 'member') => {
       return res.status(401).json({ error: 'Authentication required.' });
     }
 
-    const orgId = req.params.orgId;
+    const orgId = Array.isArray(req.params.orgId) ? req.params.orgId[0] : req.params.orgId;
     if (!orgId) {
       return res.status(400).json({ error: 'Organization id required.' });
     }

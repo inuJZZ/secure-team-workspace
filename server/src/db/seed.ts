@@ -14,18 +14,23 @@ export const seedDemoData = async () => {
     email: 'admin@demo.com',
     passwordHash: adminPassword,
     name: 'Inass',
+    avatarUrl: '/avatars/me.jpeg',
     createdAt: new Date().toISOString()
   };
 
-  const member = {
+  const lev = {
     id: randomUUID(),
     email: 'member@demo.com',
     passwordHash: memberPassword,
-    name: 'Bob Member',
+    name: 'Lev',
+    avatarUrl: '/avatars/lova.jpeg',
     createdAt: new Date().toISOString()
   };
+  const ikkypriv = { ...lev, id: randomUUID(), email: 'ikkypriv@demo.com', name: 'Ikkypriv', avatarUrl: '/avatars/ikram.jpeg' };
+  const ashgurlx = { ...lev, id: randomUUID(), email: 'ashgurlx@demo.com', name: 'ashgurlx', avatarUrl: '/avatars/laila.jpeg' };
+  const yass = { ...lev, id: randomUUID(), email: 'yass@demo.com', name: 'yass', avatarUrl: '/avatars/yass.jpeg' };
 
-  users.push(admin, member);
+  users.push(admin, lev, ikkypriv, ashgurlx, yass);
 
   const org = {
     id: randomUUID(),
@@ -37,7 +42,10 @@ export const seedDemoData = async () => {
 
   memberships.push(
     { userId: admin.id, orgId: org.id, role: 'admin', createdAt: new Date().toISOString() },
-    { userId: member.id, orgId: org.id, role: 'member', createdAt: new Date().toISOString() }
+    { userId: lev.id, orgId: org.id, role: 'member', createdAt: new Date().toISOString() },
+    { userId: ikkypriv.id, orgId: org.id, role: 'member', createdAt: new Date().toISOString() },
+    { userId: ashgurlx.id, orgId: org.id, role: 'member', createdAt: new Date().toISOString() },
+    { userId: yass.id, orgId: org.id, role: 'member', createdAt: new Date().toISOString() }
   );
 
   const project = {
@@ -51,10 +59,10 @@ export const seedDemoData = async () => {
   projects.push(project);
 
   tasks.push(
-    { id: randomUUID(), projectId: project.id, title: 'The Stranger', description: 'Albert Camus / An unsettling classic about absurdity, choice, and consequence.', status: 'todo', assigneeId: member.id, createdBy: admin.id, createdAt: new Date().toISOString() },
+    { id: randomUUID(), projectId: project.id, title: 'The Stranger', description: 'Albert Camus / An unsettling classic about absurdity, choice, and consequence.', status: 'done', assigneeId: lev.id, createdBy: admin.id, createdAt: new Date().toISOString() },
     { id: randomUUID(), projectId: project.id, title: 'The Metamorphosis', description: 'Franz Kafka / A surreal, intimate story of isolation and identity.', status: 'in_progress', assigneeId: admin.id, createdBy: admin.id, createdAt: new Date().toISOString() },
-    { id: randomUUID(), projectId: project.id, title: 'Crime and Punishment', description: 'Fyodor Dostoevsky / A psychological journey through guilt, morality, and redemption.', status: 'todo', assigneeId: null, createdBy: admin.id, createdAt: new Date().toISOString() },
-    { id: randomUUID(), projectId: project.id, title: 'And Then There Were None', description: 'Agatha Christie / A celebrated mystery of suspicion, secrets, and survival.', status: 'todo', assigneeId: null, createdBy: admin.id, createdAt: new Date().toISOString() },
+    { id: randomUUID(), projectId: project.id, title: 'Crime and Punishment', description: 'Fyodor Dostoevsky / A psychological journey through guilt, morality, and redemption.', status: 'in_progress', assigneeId: ashgurlx.id, createdBy: admin.id, createdAt: new Date().toISOString() },
+    { id: randomUUID(), projectId: project.id, title: 'And Then There Were None', description: 'Agatha Christie / A celebrated mystery of suspicion, secrets, and survival.', status: 'done', assigneeId: yass.id, createdBy: admin.id, createdAt: new Date().toISOString() },
     { id: randomUUID(), projectId: project.id, title: 'Anna Karenina', description: 'Leo Tolstoy / Love, society, and the cost of living against convention.', status: 'todo', assigneeId: null, createdBy: admin.id, createdAt: new Date().toISOString() },
     { id: randomUUID(), projectId: project.id, title: 'Pride and Prejudice', description: 'Jane Austen / Wit, first impressions, and the search for an equal heart.', status: 'todo', assigneeId: null, createdBy: admin.id, createdAt: new Date().toISOString() }
   );
