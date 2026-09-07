@@ -1,94 +1,99 @@
-# Secure Team Workspace
+A Free Ebook Library "enuLib"
 
-A small, secure full-stack workspace for portfolio teams. It includes authentication, organizations, roles, projects, tasks, and audit logs with permission enforcement on the backend.
+A personal web project where readers "YOU" can create an account, log in, and read ebooks for free directly on the website.
 
-## Stack
+? About
 
-- React + TypeScript + Vite
-- Node.js + Express + TypeScript
-- PostgreSQL-ready schema, with in-memory fixtures for local dev/testing
-- JWT-based auth with role checks
-- Vitest API tests
+I built this project to give readers a place to access ebooks online. It combines a reading experience with user accounts and authentication.
 
-## Features
+? Features
 
-- User registration and login
-- Organization membership management
-- Admin/member roles
-- Project creation
-- Task creation
-- Audit logs
-- Protected API routes and auth middleware
-- Responsive, accessible UI
+- Free Ebooks — Access the books available on the platform for free.
+- Read Online — Read directly on the website.
+- Reader Accounts — Create an account and log in.
+- Authentication — Account access supported by backend authentication and permission checks.
 
-## Prerequisites
+? Technologies and Tools
 
-- Node.js 20+
-- npm 10+
-- PostgreSQL 14+ (optional for full schema, but required for production-ready database mode)
+# Frontend
 
-## Setup
+- React — Builds the user interface.
+- TypeScript — Adds static typing to the application.
+- Vite — Provides the frontend development server and build tools.
+- React Router — Handles navigation between pages.
 
-1. Open a terminal in the project root.
+# Backend
+
+- Node.js — Runs the server.
+- Express — Handles API requests and backend routes.
+- TypeScript — Provides type checking for server code.
+- JWT — Supports authenticated sessions.
+- bcrypt — Hashes passwords.
+- Helmet — Sets security-related HTTP headers.
+- express-rate-limit — Limits repeated requests.
+
+? Development and Testing
+
+- npm Workspaces — Organizes the frontend and backend packages.
+- Concurrently — Runs both development servers together.
+- Vitest — Runs backend tests.
+- Git and GitHub — Track changes and host the repository.
+- Visual Studio Code — Development editor.
+- Vercel : for both front and back end public server deployment
+
+? Backend API
+
+The project includes an Express backend for account registration, login, and protected application routes.
+
+? Data Storage
+
+The current development setup uses an in-memory store. Data stored in memory does not persist across server restarts.
+
+The project also includes a PostgreSQL-ready schema for future database integration. A connection string alone does not replace the in-memory implementation.
+
+? Run Locally
+
+# Prerequisites
+
+- Node.js 20 or newer
+- npm 10 or newer
+
+# Setup
+
+1. Open a terminal in the repository root.
+
 2. Copy the example environment file:
 
-   copy .env.example .env
+       copy .env.example .env
 
-3. Update `.env` values if needed.
-
-   Example:
-
-   PORT=4000
-   JWT_SECRET=change_me_to_a_long_random_secret
-   DATABASE_URL=postgresql://postgres:postgres@localhost:5432/teamworkspace
-   CLIENT_URL=http://localhost:5173
+3. Configure the environment values in `.env`, including a long, random `JWT_SECRET`.
 
 4. Install dependencies:
 
-   npm install
+       npm install
 
-5. Start PostgreSQL locally and create the database:
+5. Start the frontend and backend together:
 
-   createdb teamworkspace
+       npm run dev
 
-6. Start the server:
+6. Open http://localhost:5173 in your browser.
 
-   npm run dev --workspace server
+? Available Commands
 
-7. Start the frontend in a second terminal:
+| Command | Purpose |
+| --- | --- |
+| `npm run dev` | Start the frontend and backend |
+| `npm run build` | Build both application packages |
+| `npm test` | Run backend tests |
 
-   npm run dev --workspace client
+? Project Structure
 
-8. Open the app at http://localhost:5173
+- `client/` — Frontend application
+- `server/` — Backend API and authentication
+- `server/src/db/` — Development data and seed logic
+- `server/tests/` — Backend API tests
+- `.env.example` — Example environment configuration
 
-9. Demo login credentials:
+## 🌱 Personal Project
 
-   - Admin: admin@demo.com / admin123
-   - Member: member@demo.com / member123
-
-## Database note
-
-This version is designed to work with a PostgreSQL connection string, while the in-memory store is used by default for tests and quick local runs. The server is structured so you can later swap in a real database-backed implementation without changing the public API.
-
-## Testing
-
-Run the backend tests:
-
-npm test
-
-## Security decisions
-
-- JWTs are used for authenticated sessions.
-- Authorization headers are validated on every protected route.
-- Organization-level permission checks require a valid membership.
-- Admin-only routes reject non-admin users with a 403 response.
-- Rate limiting and security headers are enabled via Helmet and express-rate-limit.
-- Passwords are never stored in plaintext; they are hashed with bcrypt.
-
-## Project structure
-
-- `client/` — React frontend
-- `server/` — Express API
-- `server/src/db/` — in-memory data and seed logic
-- `server/tests/` — API tests
-- `.env.example` — example environment configuration
+This is a personal project that I use to develop my full-stack programming skills while building a platform for reading ebooks online.
